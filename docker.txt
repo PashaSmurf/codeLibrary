@@ -1,0 +1,37 @@
+1) sudo apt-get update
+2) sudo apt-get install -y docker.io
+3) sudo systemctl status docker (проверяем статус работы)
+4) sudo systemctl start docker && sudo systemctl enable docker (если не запущен)
+Далее нужно создать image и из него создать контейнер. Пример с maven и Dockerfile
+5) Создать .jar maven-проекта
+6) Создать Dockerfile (nano Dockerfile)
+7) Инфа в Dockerfile
+	FROM openjdk:8-jdk-alpine  
+	ENV globalValue /home/fold
+	ADD projectdb.jar projectdb.jar
+	ENTRYPOINT ["java", "-jar", "projectdb.jar"]
+8) FROM - образ, который берется за основу; ADD - добавление в образ; 
+ENV - создание переменной среды; ENTRYPOINT - действие
+9) docker build -t project .
+создание образа с именем project. Команда выполняется непосредственно в папке с файлом jar
+и Dockerfile
+10) docker run -d -p 8080:8080 -v /home/admin/images:/home/fold --name projectdb projectdb
+-d - все сделается без выводов логов в консоль
+-p - проброска портов (host_port:cont_port)
+-v - создание общей с контейнером директории (host_folder:cont_folder)
+--name - выбор имени контейнера
+<projectdb> в конце - выбор image для создания контейнера
+ВСЁ!!!
+
+доп команды:
+docker ps (просмотр созданных и запущенных контейнеров)
+docker ps -a (просмотр всех созданных контейнеров)
+docker stop <cont_id> (остановка контейнера)
+docker rm <cont_id> (удаление контейнера)
+docker images (просмотр доступных образов)
+docker rmi <name_image> (удаление выбранного образа. Удалится только если нет контейнеров,
+созданных через этот образ)
+docker exec -it <cont_id> /bin/sh (открытие консоли в контейнере)
+docker attach <id_cont> (присоединение к контейнеру)
+
+ 

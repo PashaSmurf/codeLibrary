@@ -1,0 +1,10 @@
+function deletePhoto() {
+    //запрос на удаление ImageInformation из БД по имени файла (imageInformation.link)
+    //возвращает "yes" - ok, "no" - error
+    $.post("/deleteImage", {
+        name: document.getElementsByClassName("slider__item_active")[0].getElementsByTagName("img")[0].getAttribute("src")
+    }, function (d) {
+        if (d === "yes") location.href = '/';
+        else alert("Error");
+    });
+}

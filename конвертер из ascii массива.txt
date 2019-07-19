@@ -1,0 +1,5 @@
+String[] elephantList = makerNote.split(",");
+StringBuilder result = new StringBuilder();
+for(String str : elephantList){
+        result.append(new String(new char[]{(char) Integer.valueOf(str).intValue()}));
+}

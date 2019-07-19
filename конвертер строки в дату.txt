@@ -1,0 +1,11 @@
+    //парсинг строковой даты в Date
+    private Date getDateFromString(String date) {
+        Date data = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            data = format.parse(date);
+        } catch (ParseException ex) {
+            System.out.println("Ошибка конвертации даты");
+        }
+        return data;
+    }
