@@ -1,0 +1,25 @@
+//просмотр            
+System.out.println("\nFind all: ");
+            List<Document> all = mongoTemplate.getCollection("ROLE").find().into(new ArrayList<Document>());
+            System.out.println(all);
+
+            System.out.println("\nFind all cursor: ");
+            MongoCursor<Document> cursor = mongoTemplate.getCollection("ROLE").find().iterator();
+
+            while (cursor.hasNext()) {
+                System.out.println(cursor.next().get("ROLE_NAME"));
+            }
+
+
+//удаление
+            mongoTemplate.getCollection("ROLE").deleteOne(eq("_id", 438));
+            System.out.println("\nFind all: ");
+            List<Document> all = mongoTemplate.getCollection("ROLE").find().into(new ArrayList<Document>());
+            System.out.println(all);
+
+//обновление
+Bson filter = eq("_id", Long.valueOf(records.getString("USER_ID")));
+                            List<Document> documentList = new ArrayList<>();
+                            documentList.add(new Document("_id", Long.valueOf(records.getString("ROLE_ID"))));
+                            Bson query = combine(set("LIST_ROLE", documentList));
+                            mongoTemplate.getCollection("APP_USER").updateOne(filter, query);
