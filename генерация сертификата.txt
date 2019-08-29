@@ -2,3 +2,11 @@
 2) keytool.exe (для проверки)
 3) keytool -genkey -alias testhttps -storetype JKS -keyalg RSA -keysize 2048 -validity 365 -keystore testhttps.jks
 4) Ввести пароли (не забыть), остальное неважно
+////////////////////
+если вы добавляете публичную часть ключа в свой keystore, то вам нужно
+1) перенести файл с публичной частью ключа в папку C:\Program Files\Java\jdk1.8.0_212\jre\bin
+2) перейти в папку с jdk: cd C:\Program Files\Java\jdk1.8.0_212\jre\bin
+3) keytool -import -alias tomcat-localhost -file pub.pem -keystore "C:\Program Files\Java\jdk1.8.0_212\jre\lib\security\cacerts"
+--alias может быть любой
+--pub.pem - это публичная часть ключа
+--cacerts - keystore, куда надо положить эту часть ключа
