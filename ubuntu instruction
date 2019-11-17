@@ -1,0 +1,78 @@
+1. Обновить все компоненты (докачать с магазина если нужно скайп и телегу)
+
+sudo su
+apt-get update
+apt-get upgrade
+
+2. Если на борту две видеокарты, то одну надо отключить, чтобы снизить энергопотребление.
+В нашем случае отключаем дискретную
+
+lspci | grep VGA
+sudo cat /sys/kernel/debug/vgaswitcheroo/switch
+sudo echo OFF * /sys/kernel/debug/vgaswitcheroo/switch
+
+3. Для того, чтобы иметь больше кастомных настроек (например, действие ноутбука при закрытии
+крышки), надо
+
+apt install gnome-tweaks
+
+4. Установим Java
+
+sudo apt install openjdk-8-jdk
+sudo apt install openjdk-8-jre
+java -version
+
+5. Установим Idea
+
+Скачаем архив с idea с официального сайта
+Потом разархивируем его
+Замувим в то место, которое нужно, например в /home/{user}/progs
+Перейдем в терминале в папку bin
+./idea.sh
+Далее для удобства в Главном меню во вкладке Tools выберем Create desktop entry
+Тоже самое повторяем с любым продуктом с Jetbrains
+
+6. Установка git (как бинарный пакет)
+
+apt-get install git
+
+7. Устанавливаем mysql
+
+sudo apt-get install mysql-server
+sudo mysql_secure_installation
+Выбираем сложность пароля и вводим его два раза. Далее все время жмем "Да"
+Теперь поставим пользователю root способ авторизации паролем
+sudo mysql
+SELECT user,authentication_string,plugin,host FROM mysql.user;
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'; //вместо password вставить свой пароль
+FLUSH PRIVILEGES;
+exit
+Потом из магазина ставим Workbench
+
+8. Устанавливаем nodejs и npm
+
+curl -sL https://deb.nodesource.com/setup_12.x -o nodesource_setup.sh //вместо 12 ставить актуальную версию
+sudo bash nodesource_setup.sh
+sudo apt install nodejs
+Проверяем версии
+nodejs -v
+npm -v
+Если возникли проблемы при добавлении проекта с git в webstorm, то 
+rm -rf node_modules
+npm cache clean --force
+npm install
+
+9. Удаленный доступ
+
+скачаиваем Remote desktop viewer
+
+10. Запустить checkpoint для удаленного доступа
+
+snx -s vpngate3.iba.by -u LiakhouskiP
+Вводим пароль от vpn
+Liak-123
+Потом заходим в RDV
+172.20.3.9 - host
+IBA - Domain
+Password - Liak-123
+LiakhouskiP - login
