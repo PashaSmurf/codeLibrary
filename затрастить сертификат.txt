@@ -1,0 +1,2 @@
+консоль от имени одмена
+keytool -import -alias cert13112019 -keystore "C:/Program Files/Java/jdk1.8.0_212/jre/lib/security/cacerts" -file "D:/cert.cer"

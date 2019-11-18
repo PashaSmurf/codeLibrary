@@ -1,0 +1,15 @@
+1)переходим в keytool
+
+2)генерация пары ключей в keystore
+keytool -genkeypair -alias testkeyauth -keyalg RSA -keysize 2048 -dname "CN=rajind,OU=dev,O=bft,L=mt,C=Srilanka" -keystore testkeyauthkeystore.jks -keypass Hgf567Liak-123 -storepass Hgf567Liak-123
+
+3)Convert JKS to the PKCS12 format
+keytool -importkeystore -srckeystore testkeyauthkeystore.jks -srcstorepass Hgf567Liak-123 -srckeypass Hgf567Liak-123 -srcalias testkeyauth -destalias testkeyauth -destkeystore testkeyauthkeystore.p12 -deststoretype PKCS12 -deststorepass Hgf567Liak-123 -destkeypass Hgf567Liak-123
+
+4)переносим наш keystore в папку openssl/bin и переходим туда в ком.строке
+
+5)вытаскиваем private key
+openssl pkcs12 -in testkeyauthkeystore.p12 -nodes -nocerts -out private_key.pem
+
+6)выытаскиваем publick key
+openssl pkcs12 -in testkeyauthkeystore.p12 -nokeys -out cert.pem
