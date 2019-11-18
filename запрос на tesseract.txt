@@ -1,0 +1,2 @@
+curl -X POST -H "Content-Type: application/json" -d '{"img_url":"http://img1.labirint.ru/books/656782/scrn_big_02.jpg","engine":"tesseract"}' -k https://169.50.197.82:80/ocr
+C:\Windows\system32>tesseract d:\123.jpg d:\factoryWork\output -l eng +d:\tess\myconfig
