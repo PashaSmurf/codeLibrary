@@ -25,3 +25,7 @@ git diff test
 
 //только имена файлов с изменениями
 git diff --name-only test
+
+//склонировать ветку dep в cloneDep (создавать cloneDep заранее не нужно)
+git checkout -b cloneDep dep
+//потом делаем изменение в cloneDep и push'им. автоматически из локальной ветки cloneDep создается удаленная ветка на git'е
