@@ -1,0 +1,89 @@
+ADD SWAGGER TO SPRING BOOT PROJECT
+
+1. Добавить зависимость springfox swagger2
+Например
+<dependency>
+<groupId>io.springfox</groupId>
+<artifactId>springfox-swagger2</artifactId>
+<version>2.9.2</version>
+</dependency>
+
+2. Добавить аннотация @EnableSwagger2 в класс запуска spring boot
+Например
+@SpringBootApplication
+@EnableSwagger2
+public class Application {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+}
+
+3. Заценить например в postman
+http://localhost:8080/v2/api-docs
+
+4. Добавить springfox swagger ui
+Например
+<dependency>
+<groupId>io.springfox</groupId>
+<artifactId>springfox-swagger-ui</artifactId>
+<version>2.9.2</version>
+</dependency>
+
+5. Заценить в браузере
+http://localhost:8080/swagger-ui.html
+
+CONFIGURE SWAGGER
+1. Добавление swaggerConfiguration
+
+    @Bean
+    public Docket swaggerConfiguration() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .paths(PathSelectors.ant("/getDialogs"))
+                .apis(RequestHandlerSelectors.basePackage("rest"))
+                .build();
+    }
+Добавляется внутрь @SpringBootApplication
+2. Теперь конфигурируем общую ифнормацию API
+
+    private ApiInfo apiInfo() {
+        return new ApiInfo(
+                "Address book API",
+                "Sample API",
+                "1.0",
+                "Free to use",
+                new Contact("Pavel Liakhouski", "https://vk.com/pasha_smurf", "pavelljahovskij@mail.ru"),
+                "API License",
+                "https://vk.com/pasha_smurf",
+                Collections.emptyList());
+    }
+Вставляем туда же. А потом вызываем его из Docket
+///////
+                .apis(RequestHandlerSelectors.basePackage("rest"))
+                .build()
+                .apiInfo(apiInfo());
+
+3. Пример оформления описания контроллера
+    @ApiOperation(value = "Get all dialogs", response = Dialogs.class, notes = "small description")
+    @GetMapping("/getDialogs")
+    private Map<String, List<DialogsForReact>> getDialogs(@ApiParam(value = "HttpServletResponse", required = true) HttpServletResponse httpServletResponse) {
+        httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
+        List<DialogsForReact> dialogsForReactsList = new ArrayList<>();
+        for (Dialogs dialog : dialogsRepo.findAll()) {
+            dialogsForReactsList.add(new DialogsForReact(dialog));
+        }
+        Map<String, List<DialogsForReact>> map = new HashMap<>();
+        map.put("dialogs", dialogsForReactsList);
+        return map;
+    }
+
+4. Пример оформления описания модели
+@Entity
+@Table(name = "DIALOGS")
+@ApiModel(description = "This is Dialog description")
+public class Dialogs {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @ApiModelProperty(notes = "this is 'id'")
+    private Long id;
