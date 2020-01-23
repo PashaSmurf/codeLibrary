@@ -34,4 +34,33 @@ docker rmi <name_image> (удаление выбранного образа. У�
 docker exec -it <cont_id> /bin/sh (открытие консоли в контейнере)
 docker attach <id_cont> (присоединение к контейнеру)
 
+Docker for MySQL:
+
+after pull image "mysql"
+docker run \
+-e MYSQL_ROOT_PASSWORD=mypassword \
+-e MYSQL_DATABASE=Items \
+-e MYSQL_USER=myuser \
+-e MYSQL_PASSWORD=mypassword \
+-d \
+-p 40306:3306 \
+--name mysql1 \
+mysql
+
+docker run \
+-e MYSQL_ROOT_PASSWORD=mypassword \
+-e MYSQL_DATABASE=Items \
+-e MYSQL_USER=myuser \
+-e MYSQL_PASSWORD=mypassword \
+-d \
+-p 50306:3306 \
+-v /var/local/mysql:/var/lib/mysql \
+--name mysql2 \
+mysql
+
+docker exec -it mysql1 bash
+
+mysql -u root -p
+mysql --version
+show databases;
  
