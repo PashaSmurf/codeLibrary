@@ -34,6 +34,36 @@ docker rmi <name_image> (удаление выбранного образа. У�
 docker exec -it <cont_id> /bin/sh (открытие консоли в контейнере)
 docker attach <id_cont> (присоединение к контейнеру)
 
+
+Dockerfile variables description:
+**fundamental instructions
+ARG //версия образа, который мы запуллим через FROM
+FROM //образ (image), который мы используем в качестве базового для нашего контейнера
+Example for fundamental instructions
+ARG CODE_VERSION=16.04
+FROM ubuntu:${CODE_VERSION}
+RUN apt-get update -y
+CMD ["bash"]
+**configuration instructions
+RUN //команды, которые требуется выполнить сразу после создания контейнера. К примеру, обновление системы, создание каталогов, установка библиотек
+ADD | COPY
+ENV //добавление переменных среды в формате {имя_перемнной:значение}
+Example configuration instruction
+FROM ubuntu:16.04
+RUN apt-get update && apt-get install -y curl \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/*
+RUN mkdir /home/Codes
+ENV USER Cerulean-Canvas
+ENV SHELL /bin/bash
+ENV LOGNAME Cerulean-Canv
+CMD ["bash"]
+**execution instructions
+CMD
+ENTRYPOINTS
+EXPOSE
+
+
 Docker for MySQL:
 
 after pull image "mysql"
