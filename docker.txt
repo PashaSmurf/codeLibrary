@@ -64,6 +64,22 @@ ENTRYPOINTS
 EXPOSE
 
 
+
+**Search, List, Push, Pull
+docker search python:3.6 //лист образов с ключевым словом python, которые отсортированы по "stars"
+docker search --filter "is-official=true" registry //официальный образ
+docker search --format "table {{.Name}}\t{{Description}}\t{{.IsOfficial}}" registry //только те колонки, которые мы введем
+
+docker image ls
+docker images //выведет все образы
+docker images ubuntu //выведет все образы ubuntu
+docker images ubuntu:16.04 //только образы ubuntu с версией 16.04
+docker images --no-trunc ubuntu:16.04 //полная информация (полный id_image)
+
+docker image pull nginx:latest //загрузка образа последней версии
+docker image pull nginx:alpine //только для alpine (лучше, так как весит меньше)
+docker image pull --all-tags nginx //загрузка всех версий для nginx
+
 Docker for MySQL:
 
 after pull image "mysql"
