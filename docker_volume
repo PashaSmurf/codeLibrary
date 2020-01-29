@@ -1,0 +1,6 @@
+docker volume create vol-busybox
+docker run -d --volume vol-ubuntu:/tmp ubuntu
+docker volume ls
+docker volume ls --filter "dangling=true"
+docker volume inspect vol-ubuntu
+docker volume rm vol-ubuntu
