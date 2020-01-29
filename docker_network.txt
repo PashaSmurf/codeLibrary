@@ -1,6 +1,9 @@
-docker network create --driver bridge my-bridge
-docker network create --driver bridge --subnet=192.168.0.0/16 --ip-range=192.168.5.0/24 my-bridge-1
-docker network ls
-docker network ls --filter driver=bridge
-docker network connect my-bridge-1 my-ubuntu
-docker container inspect my-ubuntu
+docker network create --driver bridge my-bridge //создание public-сети
+docker network create --driver bridge --subnet=192.168.0.0/16 --ip-range=192.168.5.0/24 my-bridge-1 //создание public-сети с дополнительными конфигурациями
+docker network ls //просмотр всех сетей
+docker network ls --filter driver=bridge //фильтр "bridge" по всем сетям
+docker network connect my-bridge-1 my-ubuntu //добавление новой сети в уже существующий контейнер
+docker container inspect my-ubuntu // получение спискуа всех настроек контейнера
+docker container inspect --format "{{json .NetworkSettings}}" my-ubuntu //вывод настроек сети в формате json
+docker container run -itd --network host --name cont_nginx nginx:latest //создание контейнера с сетью host
+docker network disconnect my-bridge-1 my-ubuntu //убрать выбранную сеть из контейнера
