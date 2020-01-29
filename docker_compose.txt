@@ -1,0 +1,15 @@
+**install
+sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+
+//если команда docker-compose не найдена, то
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+**info
+YAML = YMAL Ain't Markup Language
+
+Datatypes:
+1) Scalars (Strings and Numbers)
+2) Sequences (Arrays and Lists)
+3) Mappings (Hashes and Dictionary)
