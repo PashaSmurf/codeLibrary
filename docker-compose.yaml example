@@ -1,0 +1,41 @@
+ersion: '3.3'
+services:
+ db:
+  image: mysql:5.7
+  container_name: mysql_cont
+  volumes:
+   - db_data:/var/lib/mysql
+  restart: always
+  environment:
+   MYSQL_ROOT_PASSWORD: mypassword
+   MYSQL_USER: wordpress
+   MYSQL_PASSWORD: wordpress
+   MYSQL_DATABASE: wordpress
+  networks:
+   - compose-net
+ wp:
+  depends_on:
+   - db
+  image: wordpress:latest
+  links:
+   - db:mysql
+  container_name: wordpress_cont
+  volumes:
+   - wp_files:/var/www/html
+  ports:
+   - "3000:80"
+  restart: always
+  environment:
+   WORDPRESS_DB_HOST: db:3306
+   WORDPRESS_DB_USER: wordpress
+   WORDPRESS_DB_PASSWORD: wordpress
+   WORDPRESS_DB_NAME: wordpress
+   WORDPRESS_TABLE_PREFIX: wp_
+  networks:
+   - compose-net
+volumes:
+ wp_files:
+ db_data:
+networks:
+ compose-net:
+  driver: bridge
