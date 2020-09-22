@@ -1,0 +1,37 @@
+Первым делом поставить npm и @angular/cli
+sudo npm install -g @angular/cli
+
+После переходим в папку, где мы хотим развернуть проект. Далее команда
+ng new <project_name>
+ng new ng-basics
+
+Далее проект можно открывать в любом редакторе
+
+Что для чего
+-e2e - end-to-end testing
+-node_modules - Список зависимостей
+-src - исходный код приложения
+-.editorconfig - системный файл для редакторов, чтобы в разных редакторов стиль был идентичный
+.gitignore - 
+-angular.json - файл конфигурации для вего приложения
+-browserslist - подстраивает JS и CSS под разные браузеры
+-karma.conf.js - писать unit-тесты для ангуляра
+-package.json - хранит список всех зависимостей. Также содержит скрипты для автоматизации запуска приложения
+-package-lock.json - системный файл для более эффективной работы с версионностью пакетов
+-README.md - 
+-tsconfif.app.json - настройка компиляции TS
+-tsconfig.json - набор опций для TS
+-tsconfig.spec.json - настройка TS для тестов
+-tslint.json - настройка TS для линта
+
+Старт приложения через терминал
+npm start
+
+app.module.ts
+@NgModule - декоратор (метод), который оборачивает класс
+
+app.component.ts
+@Component - selector - связывает разметку и TS
+
+создать компоненту через терминал
+ng g c <component_name> --skipTests
