@@ -1,0 +1,40 @@
+Устанавливает TS глобально
+
+--sudo npm install -g typescript
+
+Создаем файл index.ts, из него формируем файл index.js
+
+--tsc index.ts
+
+(Из файла .ts формируется файл .js. Код преобразуется в аналогичный формата ES5)
+
+Базовые типы
+
+Строки
+const str: string = 'Hello world';
+
+Any
+let anyVar: any = {};
+Если мы не знаем, какой тип будет у переменной. Плохая практика
+
+Number
+Числа
+let num: number = 42;
+
+Boolean
+let isActive: boolen = false;
+
+Массивы
+let strArray1 = ['H', 'e', 'l'];
+let strArray2: string[] = ['H', 'e', 'l'];
+let strArray3: Array<string> = ['H', 'e', 'l'];
+
+
+Функции
+----------
+function logInfo(name: string, age: number): void {
+  console.log('Info: ${name}, ${age}');
+}
+
+logInfo('Hello', 42);
+----------
